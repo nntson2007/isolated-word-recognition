@@ -10,7 +10,7 @@ Dự án so sánh hiệu năng giữa 3 kiến trúc mạng thần kinh nhân t�
 
 - Tập dữ liệu: Google Speech Commands Dataset v0.02 (phân loại tập 35 từ, ví dụ: yes, no, dog, cat,...)
 - Đặc trưng âm thanh: Sampling rate (16kHz), Log-Mel Spectrogram (`n_mels=40`, `n_fft=400`,`hop_length=160`)
-- Hyperparameters cố định: Batch size (32), Optimizer (Adam, $lr = 10^{-3}$, $weight_decay=10^{-4}$), Loss (CrossEntropyLoss), Epochs (5)
+- Hyperparameters cố định: Batch size (32), Optimizer (Adam, $lr = 10^{-3}$, $weightdecay=10^{-4}$), Loss (CrossEntropyLoss), Epochs (5)
 
 ## Cấu trúc thư mục dự án
 ```text
@@ -49,3 +49,16 @@ Dự án so sánh hiệu năng giữa 3 kiến trúc mạng thần kinh nhân t�
 ## Phân tích & Nhận định
 - **CNN đạt độ chính xác cao hơn Vanilla RNN và BiRNN**: Đang làm
 - **BiRNN không có sự cải thiện đáng kể so với Vanilla RNN**: Đang làm
+
+## Hướng phát triển & Mở rộng
+1. **Khám phá bản chất mô hình (Stress Testing & Interpretability)**:
+   - **Frequency Bin Permutation Test**: Kiểm chứng độ phụ thuộc của CNN vào các dải tần, và độ phụ.
+   - **Time-Shift & Noise Robustness**: Đánh giá độ bền vững của mô hình khi dịch chuyển thời gian và khi trộn thêm nhiễu nền ở các mức SNR khác nhau.
+   - **CKA (Centered Kernel Alignment)**: Đo lường độ dư thừa thông tin xem BiRNN có học được gì mới không.
+   - **Đo bản đồ độ nhạy**: Đo xem năng lượng gradient của các mô hình tập trung vào đâu.
+2. **Nâng cấp kiến trúc mạng**:
+   - Thử nghiệm **LSTM** và **GRU**.
+   - Xây dựng mô hình lai **CRNN (CNN + GRU)**.
+3. **Tối ưu hóa huấn luyện**:
+   - Thử nghiệm kỹ thuật tăng cường dữ liệu âm thanh **SpecAugment** (Time/Frequency Masking).
+   - Thử nghiệm cơ chế Attention (Self-Attention Pooling) thay cho Temporal Mean Pooling.
